@@ -5,7 +5,7 @@ const books = document.querySelector(".books");
 const bookForm = document.querySelector("dialog form");
 
 
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, pages, status) {
   this.id = myLibrary.length + 1;
@@ -64,6 +64,11 @@ function toggleBookStatus(bookId) {
   displayBooks();
 }
 
+function deleteBookFromLibrary(bookId){
+    myLibrary = myLibrary.filter((book) => book.id !== bookId);
+    displayBooks();
+}
+
 function addBookToLibrary(e) {
   e.preventDefault();
   const newBook = getBookInputs();
@@ -96,6 +101,7 @@ function createBookUiItem(book) {
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "delete";
   deleteBtn.classList.add("delete-btn");
+  deleteBtn.addEventListener('click', () => deleteBookFromLibrary(book.id))
   li.append(h3, author, pages, statusBtn, deleteBtn);
   return li;
 }
