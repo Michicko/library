@@ -2,6 +2,7 @@ const bookFormModal = document.querySelector("dialog");
 const showBookFormModalButton = document.querySelector("#dialog-btn");
 const closeBookFormModalButton = document.querySelector(".cancel");
 const books = document.querySelector(".books");
+const bookForm = document.querySelector("dialog form");
 
 const myLibrary = [];
 
@@ -20,21 +21,52 @@ Book.prototype.info = function () {
 };
 
 const book1 = new Book("The Alchemist", "Paulo Coelho", 445, "unread");
+myLibrary.push(book1);
 const book2 = new Book(
   "How to fail at almost anything and still win big",
   "Scot Adams",
   449,
   "read"
 );
-const book3 = new Book("The way of men", "Jack Donovan", "356", "unread");
-const book4 = new Book("The Ambler Warning", "Robert Ludlum", 449, "unread");
-
-myLibrary.push(book1);
 myLibrary.push(book2);
+const book3 = new Book("The way of men", "Jack Donovan", "356", "unread");
 myLibrary.push(book3);
+const book4 = new Book("The Ambler Warning", "Robert Ludlum", 449, "unread");
 myLibrary.push(book4);
 
-function addBookToLibrary() {}
+function getBookInputs() {
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+  const status = [
+    ...document
+      .querySelector("#status")
+      .querySelectorAll('input[type="radio"]'),
+  ]
+    .find((el) => el.checked)
+    .id.toLowerCase();
+  return {
+    title,
+    author,
+    pages,
+    status,
+  };
+}
+
+function addBookToLibrary(e) {
+  e.preventDefault();
+  const newBook = getBookInputs();
+  const book = new Book(
+    newBook.title,
+    newBook.author,
+    newBook.pages,
+    newBook.status
+  );
+  myLibrary.push(book);
+  bookForm.reset();
+  bookFormModal.close();
+  displayBooks();
+}
 
 function createBookUiItem(book) {
   const li = document.createElement("li");
@@ -57,6 +89,7 @@ function createBookUiItem(book) {
 }
 
 function displayBooks() {
+  books.innerHTML = "";
   const booklist = myLibrary.map((book) => {
     return createBookUiItem(book);
   });
@@ -73,4 +106,4 @@ closeBookFormModalButton.addEventListener("click", () => {
   bookFormModal.close();
 });
 
-
+bookForm.addEventListener("submit", addBookToLibrary);

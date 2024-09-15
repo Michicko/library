@@ -19,7 +19,7 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 86rem;
+  max-width: 96rem;
 }
 
 .container > div:first-child {
@@ -38,36 +38,49 @@ h1 {
 ul {
   list-style: none;
   display: grid;
-  row-gap: 2rem;
   height: calc(100vh - 15rem);
   overflow-y: scroll;
   align-content: flex-start;
+  scrollbar-color: #a3a3a3 transparent;
+  scrollbar-width: thin;
+  padding: 0 .5rem;
 }
 
 ul::-webkit-scrollbar {
-  width: 0;
   background: transparent;
+  scrollbar-color: #a3a3a3 transparent;
+  scrollbar-width: thin;
 }
 
 ul::-webkit-scrollbar-thumb {
   background: transparent;
 }
 
-li {
+.book-heading{
+    padding: 0 1.5rem 0 .5rem;
+}
+
+li,
+.book-heading {
   display: grid;
-  grid-template-columns: 3fr repeat(4, 1fr);
+  grid-template-columns: 4fr 2fr repeat(3, 1fr);
   align-items: center;
   gap: 2rem;
 }
 
-li h3 {
+.book-heading {
+  margin-bottom: 2rem;
+}
+
+li h3,
+.book-heading h3 {
   font-size: 1.6rem;
   font-weight: 500;
   color: #333;
   list-style-position: 0.2rem;
 }
 
-li:first-child h3 {
+.book-heading h3 {
   font-weight: 600;
 }
 

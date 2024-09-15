@@ -11,12 +11,12 @@
     <dialog>
       <h2>Add a new book</h2>
       <form>
-        <input type="text" name="title" id="title" placeholder="Title" />
-        <input type="text" name="author" id="author" placeholder="Author" />
-        <input type="number" name="pages" id="pages" placeholder="Pages" />
+        <input type="text" name="title" id="title" autocomplete="on" placeholder="Title" />
+        <input type="text" name="author" id="author" autocomplete="on" placeholder="Author" />
+        <input type="number" name="pages" id="pages" placeholder="Pages" autocomplete="on"  />
         <div>
           <p class="form-text">Book status:</p>
-          <div class="form-group">
+          <div class="form-group" id="status">
             <label for="read">
               <input type="radio" name="status" id="read" /> Read
             </label>
@@ -36,14 +36,14 @@
         <h1>Book List</h1>
         <button id="dialog-btn">New Book</button>
       </div>
+      <div class="book-heading">
+        <h3>Title</h3>
+        <h3>Author</h3>
+        <h3>Pages</h3>
+        <h3>Status</h3>
+        <h3>&nbsp;</h3>
+      </div>
       <ul class="books">
-        <li class="book-heading">
-          <h3>Title</h3>
-          <h3>Author</h3>
-          <h3>Pages</h3>
-          <h3>Status</h3>
-          <h3>&nbsp;</h3>
-        </li>
       </ul>
     </div>
   </body>
