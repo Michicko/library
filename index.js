@@ -48,13 +48,12 @@ function getBookInputs() {
       .querySelector("#status")
       .querySelectorAll('input[type="radio"]'),
   ]
-    .find((el) => el.checked)
-    .id.toLowerCase();
+    .find((el) => el.checked);
   return {
     title,
     author,
     pages,
-    status,
+    status: status ? status.id.toLowerCase() : 'unread',
   };
 }
 
@@ -72,6 +71,8 @@ function deleteBookFromLibrary(bookId){
 function addBookToLibrary(e) {
   e.preventDefault();
   const newBook = getBookInputs();
+  if(!newBook.title || !newBook.author || !newBook.pages || !newBook.status) return;
+  console.log(newBook)
   const book = new Book(
     newBook.title,
     newBook.author,
