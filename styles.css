@@ -137,7 +137,8 @@ dialog .form-text {
   font-size: 1.3rem;
 }
 
-dialog input[type="text"], dialog input[type='number'] {
+dialog input[type="text"],
+dialog input[type="number"] {
   padding: 1rem 0.5rem;
   outline: none;
   border: 1px solid rgba(11, 129, 165, 0.5);
@@ -145,8 +146,8 @@ dialog input[type="text"], dialog input[type='number'] {
   color: #333;
 }
 
-dialog input[type='number']::-webkit-inner-spin-button{
-    display: none;
+dialog input[type="number"]::-webkit-inner-spin-button {
+  display: none;
 }
 
 dialog input[type="text"]::placeholder,
@@ -157,6 +158,7 @@ dialog input[type="text"] {
 
 dialog input[type="text"]::placeholder {
   color: #a3a3a3;
+  text-transform: capitalize;
 }
 
 li button,
