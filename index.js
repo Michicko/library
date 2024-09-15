@@ -4,6 +4,7 @@ const closeBookFormModalButton = document.querySelector(".cancel");
 const books = document.querySelector(".books");
 const bookForm = document.querySelector("dialog form");
 
+
 const myLibrary = [];
 
 function Book(title, author, pages, status) {
@@ -18,6 +19,10 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${
     this.isRead ? "not read yet" : "has been read"
   } `;
+};
+
+Book.prototype.updateBookStatus = function (status) {
+  this.status = status;
 };
 
 const book1 = new Book("The Alchemist", "Paulo Coelho", 445, "unread");
@@ -53,6 +58,12 @@ function getBookInputs() {
   };
 }
 
+function toggleBookStatus(bookId) {
+  const book = myLibrary.find((book) => book.id === bookId);
+  book.updateBookStatus(book.status === "read" ? "unread" : "read");
+  displayBooks();
+}
+
 function addBookToLibrary(e) {
   e.preventDefault();
   const newBook = getBookInputs();
@@ -81,6 +92,7 @@ function createBookUiItem(book) {
   const statusBtn = document.createElement("button");
   statusBtn.textContent = book.status;
   statusBtn.classList += `status-btn ${book.status}`;
+  statusBtn.addEventListener('click', () => toggleBookStatus(book.id))
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "delete";
   deleteBtn.classList.add("delete-btn");
