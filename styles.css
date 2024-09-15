@@ -55,7 +55,7 @@ ul::-webkit-scrollbar-thumb {
 
 li {
   display: grid;
-  grid-template-columns: 3fr repeat(3, 1fr);
+  grid-template-columns: 3fr repeat(4, 1fr);
   align-items: center;
   gap: 2rem;
 }

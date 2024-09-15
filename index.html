@@ -14,18 +14,18 @@
         <input type="text" name="title" id="title" placeholder="Title" />
         <input type="text" name="author" id="author" placeholder="Author" />
         <div>
-            <p class="form-text">Book status:</p>
+          <p class="form-text">Book status:</p>
           <div class="form-group">
             <label for="read">
-                <input type="radio" name="status" id="read" /> Read
-              </label>
-              <label for="unread">
-                <input type="radio" name="status" id="unread" /> Unread
-              </label>
+              <input type="radio" name="status" id="read" /> Read
+            </label>
+            <label for="unread">
+              <input type="radio" name="status" id="unread" /> Unread
+            </label>
           </div>
         </div>
         <div class="form-group">
-          <button type="button">cancel</button>
+          <button type="button" class="cancel">cancel</button>
           <button type="submit" class="save">save</button>
         </div>
       </form>
@@ -39,30 +39,35 @@
         <li class="book-heading">
           <h3>Title</h3>
           <h3>Author</h3>
+          <h3>Pages</h3>
           <h3>Status</h3>
           <h3>&nbsp;</h3>
         </li>
         <li class="book" data-id="1">
           <h3>The Alchemist</h3>
           <p>Paulo Coelho</p>
+          <p>445</p>
           <button class="status-btn">Unread</button>
           <button class="delete-btn">Delete</button>
         </li>
         <li class="book" data-id="2">
           <h3>How to fail at almost anything and still win big</h3>
           <p>Scot Adams</p>
+          <p>445</p>
           <button class="status-btn read">Read</button>
           <button class="delete-btn">Delete</button>
         </li>
         <li class="book" data-id="3">
           <h3>The way of men</h3>
           <p>Jack Donovan</p>
+          <p>449</p>
           <button class="status-btn">Unread</button>
           <button class="delete-btn">Delete</button>
         </li>
         <li class="book" data-id="3">
           <h3>The Ambler Warning</h3>
           <p>Robert Ludlum</p>
+          <p>499</p>
           <button class="status-btn">Unread</button>
           <button class="delete-btn">Delete</button>
         </li>

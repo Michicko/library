@@ -1,6 +1,6 @@
-const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("#dialog-btn");
-const closeButton = document.querySelector("dialog button");
+const bookFormModal = document.querySelector("dialog");
+const showBookFormModalButton = document.querySelector("#dialog-btn");
+const closeBookFormModalButton = document.querySelector(".cancel");
 const myLibrary = []
 
 function Book(title, author, pages, isRead) {
@@ -26,14 +26,10 @@ function displayBooks(){
     
 }
 
-
-
-// "Show the dialog" button opens the dialog modally
-showButton.addEventListener("click", () => {
-  dialog.showModal();
+showBookFormModalButton.addEventListener("click", () => {
+  bookFormModal.showModal();
 });
 
-// "Close" button closes the dialog
-closeButton.addEventListener("click", () => {
-  dialog.close();
+closeBookFormModalButton.addEventListener("click", () => {
+    bookFormModal.close();
 });
