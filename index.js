@@ -72,7 +72,6 @@ function addBookToLibrary(e) {
   e.preventDefault();
   const newBook = getBookInputs();
   if(!newBook.title || !newBook.author || !newBook.pages || !newBook.status) return;
-  console.log(newBook)
   const book = new Book(
     newBook.title,
     newBook.author,
