@@ -8,7 +8,7 @@ const bookForm = document.querySelector("dialog form");
 let myLibrary = [];
 
 function Book(title, author, pages, status) {
-  this.id = myLibrary[myLibrary.length - 1].id + 1;
+  this.id = myLibrary[myLibrary.length - 1]?.id + 1 || myLibrary.length + 1;
   this.title = title;
   this.author = author;
   this.pages = pages;
