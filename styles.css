@@ -137,12 +137,16 @@ dialog .form-text {
   font-size: 1.3rem;
 }
 
-dialog input[type="text"] {
+dialog input[type="text"], dialog input[type='number'] {
   padding: 1rem 0.5rem;
   outline: none;
   border: 1px solid rgba(11, 129, 165, 0.5);
   border-radius: 0.5rem;
   color: #333;
+}
+
+dialog input[type='number']::-webkit-inner-spin-button{
+    display: none;
 }
 
 dialog input[type="text"]::placeholder,
