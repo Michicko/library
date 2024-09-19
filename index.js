@@ -4,40 +4,65 @@ const closeBookFormModalButton = document.querySelector(".cancel");
 const books = document.querySelector(".books");
 const bookForm = document.querySelector("dialog form");
 
+class Library {
+  constructor() {
+    this.shelf = [];
+  }
 
-let myLibrary = [];
+  getBooks() {    
+    return this.shelf;
+  }
 
-function Book(title, author, pages, status) {
-  this.id = myLibrary[myLibrary.length - 1]?.id + 1 || myLibrary.length + 1;
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.status = status;
+  addBook(book) {
+    this.shelf.push(book);
+  }
+
+  deleteBook(bookId){
+    this.shelf = this.shelf.filter((book) => book.id !== bookId);
+  }
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.isRead ? "not read yet" : "has been read"
-  } `;
-};
+const library = new Library();
 
-Book.prototype.updateBookStatus = function (status) {
-  this.status = status;
-};
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
+    const lastBookInLibraryShelf = library.getBooks()[library.getBooks().length - 1]
+    this.id = lastBookInLibraryShelf ? lastBookInLibraryShelf.id + 1 : 1;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      this.status === "unread" ? "not read yet" : "has been read"
+    } `;
+  }
+
+  updateStatus(status) {
+    this.status = status;
+  }
+}
+
+
 
 const book1 = new Book("The Alchemist", "Paulo Coelho", 445, "unread");
-myLibrary.push(book1);
+
+library.addBook(book1);
 const book2 = new Book(
   "How to fail at almost anything and still win big",
   "Scot Adams",
   449,
   "read"
 );
-myLibrary.push(book2);
+library.addBook(book2);
+
 const book3 = new Book("The way of men", "Jack Donovan", "356", "unread");
-myLibrary.push(book3);
+library.addBook(book3);
+
 const book4 = new Book("The Ambler Warning", "Robert Ludlum", 449, "unread");
-myLibrary.push(book4);
+library.addBook(book4);
 
 function getBookInputs() {
   const title = document.querySelector("#title").value;
@@ -47,38 +72,38 @@ function getBookInputs() {
     ...document
       .querySelector("#status")
       .querySelectorAll('input[type="radio"]'),
-  ]
-    .find((el) => el.checked);
+  ].find((el) => el.checked);
   return {
     title,
     author,
     pages,
-    status: status ? status.id.toLowerCase() : 'unread',
+    status: status ? status.id.toLowerCase() : "unread",
   };
 }
 
 function toggleBookStatus(bookId) {
-  const book = myLibrary.find((book) => book.id === bookId);
-  book.updateBookStatus(book.status === "read" ? "unread" : "read");
+  const book = library.getBooks().find((book) => book.id === bookId);
+  book.updateStatus(book.status === "read" ? "unread" : "read");
   displayBooks();
 }
 
-function deleteBookFromLibrary(bookId){
-    myLibrary = myLibrary.filter((book) => book.id !== bookId);
-    displayBooks();
+function deleteBookFromLibrary(bookId) {
+ library.deleteBook(bookId)
+  displayBooks();
 }
 
 function addBookToLibrary(e) {
   e.preventDefault();
   const newBook = getBookInputs();
-  if(!newBook.title || !newBook.author || !newBook.pages || !newBook.status) return;
+  if (!newBook.title || !newBook.author || !newBook.pages || !newBook.status)
+    return;
   const book = new Book(
     newBook.title,
     newBook.author,
     newBook.pages,
     newBook.status
   );
-  myLibrary.push(book);
+  library.addBook(book);
   bookForm.reset();
   bookFormModal.close();
   displayBooks();
@@ -97,18 +122,18 @@ function createBookUiItem(book) {
   const statusBtn = document.createElement("button");
   statusBtn.textContent = book.status;
   statusBtn.classList += `status-btn ${book.status}`;
-  statusBtn.addEventListener('click', () => toggleBookStatus(book.id))
+  statusBtn.addEventListener("click", () => toggleBookStatus(book.id));
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "delete";
   deleteBtn.classList.add("delete-btn");
-  deleteBtn.addEventListener('click', () => deleteBookFromLibrary(book.id))
+  deleteBtn.addEventListener("click", () => deleteBookFromLibrary(book.id));
   li.append(h3, author, pages, statusBtn, deleteBtn);
   return li;
 }
 
 function displayBooks() {
   books.innerHTML = "";
-  const booklist = myLibrary.map((book) => {
+  const booklist = library.getBooks().map((book) => {
     return createBookUiItem(book);
   });
   books.append(...booklist);
